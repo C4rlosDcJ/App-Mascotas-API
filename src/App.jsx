@@ -7,6 +7,7 @@ function App() {
   const [nombre, setNombre] = useState("");
   const [raza, setRaza] = useState("");
   const [edad, setEdad] = useState("");
+  const [busqueda, setBusqueda] = useState(""); // Estado para el término de búsqueda
 
   // Obtener la lista de mascotas al cargar la aplicación
   useEffect(() => {
@@ -51,9 +52,27 @@ function App() {
     }
   };
 
+  // Filtrar mascotas por nombre
+  const mascotasFiltradas = mascotas.filter((mascota) =>
+    mascota.nombre.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
   return (
     <div className="container">
       <h1>Lista de Mascotas</h1>
+
+      {/* Buscador */}
+      <div className="search-card">
+        <h2>Buscar Mascota</h2>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Buscar por nombre..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
+        </div>
+      </div>
 
       {/* Formulario para agregar mascotas */}
       <div className="card">
@@ -91,19 +110,23 @@ function App() {
       <div className="card">
         <h2>Mascotas Registradas</h2>
         <ul className="mascota-list">
-          {mascotas.map((mascota) => (
-            <li key={mascota.id} className="mascota-item">
-              <div>
-                <p>{mascota.nombre}</p>
-                <p>
-                  {mascota.raza} - {mascota.edad} años
-                </p>
-              </div>
-              <button onClick={() => eliminarMascota(mascota.id)}>
-                <i className="fas fa-trash icon"></i> Eliminar
-              </button>
-            </li>
-          ))}
+          {mascotasFiltradas.length > 0 ? (
+            mascotasFiltradas.map((mascota) => (
+              <li key={mascota.id} className="mascota-item">
+                <div>
+                  <p>{mascota.nombre}</p>
+                  <p>
+                    {mascota.raza} - {mascota.edad} años
+                  </p>
+                </div>
+                <button onClick={() => eliminarMascota(mascota.id)}>
+                  <i className="fas fa-trash icon"></i> Eliminar
+                </button>
+              </li>
+            ))
+          ) : (
+            <p>No se encontraron mascotas.</p>
+          )}
         </ul>
       </div>
     </div>
