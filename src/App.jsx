@@ -16,7 +16,7 @@ function App() {
 
   const fetchMascotas = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:5000/mascotas");
+      const response = await axios.get("http://3.87.207.12/mascotas");
       setMascotas(response.data);
     } catch (error) {
       console.error("Error fetching mascotas:", error);
@@ -29,7 +29,7 @@ function App() {
       return;
     }
     try {
-      const response = await axios.post("http://127.0.0.1:5000/mascotas", {
+      const response = await axios.post("http://3.87.207.12/mascotas", {
         nombre,
         raza,
         edad,
@@ -45,7 +45,7 @@ function App() {
 
   const eliminarMascota = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:5000/mascotas/${id}`);
+      await axios.delete(`http://3.87.207.12/mascotas/${id}`);
       setMascotas(mascotas.filter((mascota) => mascota.id !== id));
     } catch (error) {
       console.error("Error eliminando mascota:", error);
