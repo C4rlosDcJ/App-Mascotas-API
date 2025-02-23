@@ -60,7 +60,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>🐾 Lista de Mascotas Dev🐾</h1>
+      <h1>🐾 Lista de Mascotas QA🐾</h1>
 
       {/* Buscador */}
       <div className="search-container">
